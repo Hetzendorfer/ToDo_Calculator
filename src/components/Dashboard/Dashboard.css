@@ -1,0 +1,35 @@
+.dashboard {
+    margin-top: 100px;
+}
+
+.todo {
+    margin-top: 24px;
+    width: 100%;
+    padding: 8px 16px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    background-color: #dedede;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0 20px 16px -16px #c3c3c3;
+
+    position: relative;
+    top: 0;
+    transition: top .3s, box-shadow .3s;
+}
+
+.todo:not([disabled]):hover {
+    top: -5px;
+    box-shadow: 0 25px 16px -16px #c3c3c3;
+}
+
+.todos {
+    margin-top: 44px;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
