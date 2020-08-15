@@ -25,7 +25,7 @@ export default class CalculatorComponent extends React.Component {
     }
 
     onClickHandler = (ev) => {
-        let result = test3(this.state.input);
+        let result = calculate(this.state.input);
         console.log("result: ", result);
         this.setState({
             result: result
@@ -50,82 +50,7 @@ export default class CalculatorComponent extends React.Component {
 }
 
 function calculate(string) {
-    let calculation = string;
-    let result = 0;
-
-    // Rechnung durchgehen und Klammern zählen
-
-    
-    let offeneKlammernCount = calculation.split("(").length - 1;
-    let schließendeKlammernCount = calculation.split(")").length - 1;
-
-    if(offeneKlammernCount > 0 && offeneKlammernCount == schließendeKlammernCount) {
-        let ebene = 0;
-        let ebene1Count = 0;
-
-        let ebene1 = [];
-
-        let index1 = 0;
-        let index2 = 0;
-
-        while(index1 >= 0) {
-            index2 = calculation.indexOf(")", index1);
-            index2 = index2 == -1 ? index2 : index2 + 1;
-
-            index1 = calculation.indexOf("(", index1);
-            index1 = index1 == -1 ? index1 : index1 + 1;
-
-            console.log("index1: " + index1);
-            console.log("index2: " + index2);
-
-            if(index2 > index1) {
-                ebene++;
-            }
-            else {
-                ebene--;
-                index1 = index2;
-            }
-
-            if(ebene == 1) {
-                ebene1Count++;
-            }
-        }
-
-        index1 = calculation.indexOf("(");
-        index2 = calculation.lastIndexOf(")");
-
-        // console.log(index1 + " : " + index2);
-
-        // console.log(calculation.substring(index1 + 1, index2));
-        result = calculate(calculation.substring(index1 + 1, index2));
-
-        calculation = calculation.substring(0, index1) + result + calculation.substring(index2 + 1);
-        console.log(calculation);
-    }
-
-    if(calculation.split("*").length - 1) {
-        result = calculation.split("*").reduce((prev, cur) => {
-            return parseFloat((prev * cur).toFixed(10));
-        });
-    }
-    else if(calculation.split("/").length - 1) {
-        result = calculation.split("/").reduce((prev, cur) => {
-            return parseFloat((prev / cur).toFixed(10));
-        });
-    }
-    else if(calculation.split("+").length - 1) {
-        result = calculation.split("+").reduce((prev, cur) => {
-            return parseFloat(prev) + parseFloat(cur);
-        });
-    }
-    else if(calculation.split("-").length - 1) {
-        result = calculation.split("-").reduce((prev, cur) => {
-            return prev - cur;
-        });
-    }
-
-    return result;
-
+    return eval(string);
 }
 
 function test3(calculation) {
@@ -257,8 +182,4 @@ function test2(arr, rechnungsart) {
     }
 
     return arr;
-}
-
-class Calculation {
-
 }
